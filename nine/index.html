@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+		ul,li{
+			list-style: none;
+		}
+		.wrap{
+			margin:100px auto;
+			width:300px;
+		}
+	.clearfix::after{
+		content:'';
+		display: block;
+		width:0;
+		height:0;
+		clear:both;
+		visibility: hidden;
+	}
+	ul{
+		width:300px;
+		height:300px;
+		/*transform: translate(10px,10px)*/
+	}
+	ul>li{
+		width:100px;
+		height:100px;
+		float:left;
+		box-sizing: border-box;
+		border:10px solid #ccc;
+		position: relative;
+		margin-left:-10px;
+		margin-top:-10px;
+		text-align:center;
+		line-height: 80px;
+	}
+	
+	ul>li:hover{
+		border:10px solid #000;
+		z-index:10;
+	}
+		
+	</style>
+</head>
+<body>
+	<div class="wrap clearfix">
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+		</ul>
+	</div>
+</body>
+</html>
