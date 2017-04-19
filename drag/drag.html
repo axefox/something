@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		#drag,ul{
+			width:600px;
+			height:300px;
+			border:1px solid #ccc;
+			margin:0 auto;
+		}
+		ul,li{
+			list-style:none;
+		}
+		li{
+			width:100px;
+			height:50px;
+			background-color: rgba(0,0,0,.7);
+			float:left;
+			margin:10px;
+			text-align: center;
+			line-height: 50px;
+		}
+	</style>
+</head>
+<body>
+	<div id='drag'>
+		
+	</div>
+	<script>
+	//页面插入dom元素
+	var arr=['a','b','c','d','e','f','g']
+	var ul=document.createElement('ul')
+	function creLi(){
+		return document.createElement('li')
+	}
+	for (var i=0;i<arr.length;i++){
+		var li=creLi();
+		li.innerHTML=arr[i];
+		li.setAttribute("draggable",'true')
+		li.setAttribute('class',"a"+i)
+		ul.appendChild(li)
+	}
+	var add=document.createElement('li');
+	add.innerHTML="+";
+	ul.appendChild(add)
+//页面插入dom元素结束
+
+//拖拽事件开始
+var drag=document.querySelector('#drag')
+drag.appendChild(ul)
+
+var lis=document.querySelectorAll('li')
+
+for(var i=0;i<lis.length;i++){
+	//li元素默认不可拖拽，需添加draggable属性 在开始拖拽时设置属性
+	lis[i].addEventListener('dragstart',function(e){
+		e.dataTransfer.setData('text',e.target.getAttribute('class'))
+	})
+	//对target对象阻止默认事件
+	lis[i].addEventListener('dragover',function(e){
+		e.preventDefault()
+	})
+	//监听拖拽结束事件
+	lis[i].addEventListener('drop',function(e){
+		var dragLi=document.querySelector('.'+e.dataTransfer.getData('text'))
+		console.log(e.target.parentNode)
+		console.log(e.target.nextSibling)
+		console.log(Object.prototype.toString.call(e.target.parentNode.children))
+		if(e.target.nextSibling==e.target.parentNode.children[e.target.parentNode.children.length]){
+			e.target.parentNode.insertBefore(dragLi,e.target)
+		}
+		else{
+			e.target.parentNode.insertBefore(dragLi,e.target.nextSibling)
+		}
+
+	})
+
+}
+
+//拖拽事件结束
+	</script>
+</body>
+</html>
